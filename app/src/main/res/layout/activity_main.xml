@@ -5,7 +5,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="app.hono.viewpager.MainActivity">
+            tools:context=".MainActivity">
 
         <androidx.viewpager.widget.ViewPager
                 android:id="@+id/view_pager"

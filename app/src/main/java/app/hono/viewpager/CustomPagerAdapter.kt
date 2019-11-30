@@ -1,16 +1,19 @@
 package app.hono.viewpager
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import app.hono.viewpager.databinding.ItemViewPagerBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class CustomPagerAdapter(val context: Context, val images: IntArray) : PagerAdapter() {
+class CustomPagerAdapter(val context: Context, val diaryList: List<Diary>) : PagerAdapter() {
 
-    override fun getCount(): Int = images.size
+    override fun getCount(): Int = diaryList.size
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -18,7 +21,12 @@ class CustomPagerAdapter(val context: Context, val images: IntArray) : PagerAdap
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val binding = ItemViewPagerBinding.inflate(LayoutInflater.from(context), container, false)
-        binding.imageView.setImageResource(images[position])
+        diaryList.forEach {
+            binding.imageView.setImageURI(Uri.parse(it.imageId))
+            binding.menuTextView.text = it.menuContent
+            binding.memoTextView.text = it.memoContent
+            binding.textView.text = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.JAPANESE).format(it.date)
+        }
 
         container.addView(binding.root)
         return binding.root
