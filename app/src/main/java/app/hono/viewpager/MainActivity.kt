@@ -35,11 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         val diaryMutableList = diaryList.toMutableList()
 
-        diaryMutableList.forEach {
-            it.imageId
-        }
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewPager.adapter =
             CustomPagerAdapter(this, diaryMutableList)
